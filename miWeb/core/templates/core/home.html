@@ -1,0 +1,135 @@
+{% extends 'core/base.html' %}
+{% load static %}
+    
+{% block home %}
+<section class="hero">
+    <img
+      id="toggleTheme"
+      class="theme-btn"
+      src="{% static 'core/images/theme_light.png' %}"
+      alt="theme icon"
+    />
+    <div class="hero-pic">
+      <div class="inner-circle"></div>
+      {% if profile.avatar %}
+          <img src="{{profile.avatar.url}}" alt="{{profile.name}}">
+          {% else %}
+          <img src="{% static 'core/images/no-avatar.jpg' %}" alt="{{profile.name}}"/>
+     {% endif %}
+      
+    </div>
+    <div class="hero-info">
+      <h1>{{profile.name}}</h1>
+      <h2>{{profile.bio}}</h2>
+      <div class="logo-container">
+        <a href="https://github.com/alexdelao"
+          ><img src="{% static 'core/images/github_light.png' %}" target="_blank" alt="github logo"
+        /></a>
+        <a href="https://linkedin.com/in/alexdelao"
+          ><img src="{% static 'core/images/linkedin_light.png' %}" target="_blank" alt="linkedin logo"
+        /></a>
+        <a href="https://instagram.com/4lexdelao"
+          ><img src="{% static 'core/images/insta_light.png' %}" target="_blank" alt="insta logo"
+        /></a>
+        <a href="https://youtube.com/"
+          ><img src="{% static 'core/images/youtube_light.png' %}" target="_blank" alt="youtube logo"
+        /></a>
+      </div>
+    </div>
+  </section>
+
+
+     
+  <section class="experience">
+    <!-- <h2>Soy un apasionado programador&#128113;&#128126;, experto en las tecnologias de <b>Python/Django&#128525;, JS/React &#128151;</b> asi como tambien
+        en el lenguaje <b>Java &#129299;</b>. No hay dia que no toque codigo o parenda algo nuevo. Soy apasionado a los
+        deportes extremos y acuaticos&#127940; ademas de todo lo que tenga que ver con el fitness&#128170;&#128526;. En mi tiempo libre me
+        dedico a reparar celulares e indagar para aprender cualquier cosa que tenga que ver con tecnologia&#128187;&#128640;.</h2> -->
+        <h2>{{profile.about|safe}}</h2>
+</section>
+<section class="cta">
+    <!-- <a href="{% static 'core/images/example-cv.pdf' %}" download> -->
+    <a href="{{profile.cv.url}}" download>
+        <button class="btn download-btn">Download CV</button>
+    </a>
+    <a href="mailto:{{profile.email}}"><button class="btn contact-btn">Contact Me</button></a>
+</section>
+<section class="portfolio-skills">
+    <div class="btn-bg">
+        <button class="btn-2 active-btn" id="portfolio-btn">Portfolio</button>
+        <button class="btn-2" id="skills-btn">Skills</button>
+    </div>
+</section>
+
+
+
+
+
+<section class="portfolio" id="portfolio">
+<!-- <div class="wrapper project-wrapper">
+    <a href="https://github.com/" target="_blank"><img src="{% static 'core/images/project-1.png' %}" alt="Project 1" /></a>
+</div>
+<div class="wrapper project-wrapper">
+    <a href="https://github.com/" target="_blank"><img src="{% static 'core/images/project-2.png' %}" alt="Project 2" /></a>
+</div>
+<div class="wrapper project-wrapper">
+    <a href="https://github.com/" target="_blank"><img src="{% static 'core/images/project-3.png' %}" alt="Project 3" /></a>
+</div>
+<div class="wrapper project-wrapper">
+    <a href="https://github.com/" target="_blank"><img src="{% static 'core/images/project-4.png' %}" alt="Project 4" /></a>
+</div> -->
+
+{% for project in projects %}
+<div class="wrapper project-wrapper">
+  <a href="{{project.link}}" target="_blank"><img src="{{project.image.url}}" alt="{{project.title}}" /></a>
+</div>
+{% endfor %}
+  
+</section>
+<section class="skills" id="skills">
+<div class="wrapper">
+    <h3>Frontend</h3>
+    <article class="frontend-skills">
+        <!-- <p>HTML</p>
+        <p>CSS</p>
+        <p>SASS</p>
+        <p>LESS</p>
+        <p>JavaScript</p>
+        <p>TypeScript</p>
+        <p>React</p>
+        <p>Angular</p>
+        <p>Material UI</p> -->
+        
+        {% for skill in front  %}
+          <p>{{skill.name}}</p>
+        {% endfor %}
+          
+    </article>
+</div>
+<div class="wrapper">
+    <h3>Backend</h3>
+    <article class="backend-skills">
+        <!-- <p>Node.js</p>
+        <p>Express.js</p>
+        <p>APIs</p>
+        <p>Database CRUD</p>
+        <p>Git</p>
+        <p>GraphQL</p>
+        <p>Web Servers</p> -->
+        {% for skill in back  %}
+          <p>{{skill.name}}</p>
+        {% endfor %}
+    </article>
+</div>
+</section>
+    
+
+    
+
+
+<footer>
+<p>&copy Alex De la O, Acapulco&#127965;&#65039;, Mexico&#128154; {% now "Y" %}</p>
+</footer>
+
+{% endblock home %}
+    
